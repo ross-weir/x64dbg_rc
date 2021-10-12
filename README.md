@@ -1,26 +1,14 @@
-# PluginTemplate
+# x64dbg Remote Control
 
-Template CMake project for x64dbg plugins.
+A plugin that enables [`x64dbg`](https://github.com/x64dbg/x64dbg) to be controlled remotely.
 
-## Using the template
+Currently, `attach` and `eval` commands are supported.
 
-You can click the green *Use this template* button. See the article [*Creating a repository from a template*
-](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) by GitHub for more details.
+`eval` allows the execution of arbitrary `x64dbg` commands, so technically all commands that can
+be triggered by `DbgCmdExecDirect` are supported. The idea behind having concrete commands like `attach` is so external tools can be debugger agnostic.
 
-Alternatively you can download a ZIP of this repository and set up the template locally.
+See `example/main.cpp` for example usage.
 
-## Building
+## Credits
 
-From a Visual Studio command prompt:
-
-```
-mkdir build && cd build
-cmake ..
-```
-
-You will get `PluginTemplate.sln` that you can open in Visual Studio.
-
-Alternatively you can open this folder in Visual Studio/CLion/Qt Creator.
-
-![building animation](./building.gif)
-
+The authors of `x64dbg` <3

@@ -33,36 +33,73 @@ set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
 
-project(PluginTemplate)
+project(x64dbg_rc)
 
 include("cmake/CPM.cmake")
 include("cmake/x64dbg.cmake")
 
-# Target PluginTemplate
-set(CMKR_TARGET PluginTemplate)
-set(PluginTemplate_SOURCES "")
+# Target x64dbg_rc
+set(CMKR_TARGET x64dbg_rc)
+set(x64dbg_rc_SOURCES "")
 
-list(APPEND PluginTemplate_SOURCES
+list(APPEND x64dbg_rc_SOURCES
 	"src/plugin.cpp"
 	"src/pluginmain.cpp"
 	"src/plugin.h"
 	"src/pluginmain.h"
+	"include/x64dbg_rc/x64dbg_rc.h"
 )
 
-list(APPEND PluginTemplate_SOURCES
+list(APPEND x64dbg_rc_SOURCES
 	cmake.toml
 )
 
-set(CMKR_SOURCES ${PluginTemplate_SOURCES})
-add_library(PluginTemplate SHARED)
+set(CMKR_SOURCES ${x64dbg_rc_SOURCES})
+add_library(x64dbg_rc SHARED)
 
-if(PluginTemplate_SOURCES)
-	target_sources(PluginTemplate PRIVATE ${PluginTemplate_SOURCES})
+if(x64dbg_rc_SOURCES)
+	target_sources(x64dbg_rc PRIVATE ${x64dbg_rc_SOURCES})
 endif()
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${PluginTemplate_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${x64dbg_rc_SOURCES})
+
+target_include_directories(x64dbg_rc PUBLIC
+	"include/"
+)
 
 x64dbg_plugin(${CMKR_TARGET})
+
+unset(CMKR_TARGET)
+unset(CMKR_SOURCES)
+# Target x64dbg_rc_example
+set(CMKR_TARGET x64dbg_rc_example)
+set(x64dbg_rc_example_SOURCES "")
+
+list(APPEND x64dbg_rc_example_SOURCES
+	"example/main.cpp"
+)
+
+list(APPEND x64dbg_rc_example_SOURCES
+	cmake.toml
+)
+
+set(CMKR_SOURCES ${x64dbg_rc_example_SOURCES})
+add_executable(x64dbg_rc_example)
+
+if(x64dbg_rc_example_SOURCES)
+	target_sources(x64dbg_rc_example PRIVATE ${x64dbg_rc_example_SOURCES})
+endif()
+
+get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
+if(NOT CMKR_VS_STARTUP_PROJECT)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT x64dbg_rc_example)
+endif()
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${x64dbg_rc_example_SOURCES})
+
+target_include_directories(x64dbg_rc_example PRIVATE
+	"include/"
+)
 
 unset(CMKR_TARGET)
 unset(CMKR_SOURCES)

@@ -2,7 +2,7 @@
 
 // Plugin information
 #ifndef PLUGIN_NAME
-#error You need to define PLUGIN_NAME
+#define PLUGIN_NAME x64dbg_rc
 #endif // PLUGIN_NAME
 #define PLUGIN_VERSION 1
 

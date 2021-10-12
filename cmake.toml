@@ -14,18 +14,29 @@ set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/DEBUG:FULL /INCREMENTAL:NO" CACHE STRING
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "")
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "")
 """
-name = "PluginTemplate"
+name = "x64dbg_rc"
 include-after = [
     "cmake/CPM.cmake",
     "cmake/x64dbg.cmake",
 ]
 
-[target.PluginTemplate]
+[target.x64dbg_rc]
 type = "shared"
 sources = [
     "src/*.cpp",
     "src/*.h",
+    "include/x64dbg_rc/x64dbg_rc.h",
+]
+include-directories = [
+    "include/",
 ]
 cmake-after = """
 x64dbg_plugin(${CMKR_TARGET})
 """
+
+[target.x64dbg_rc_example]
+type = "executable"
+sources = ["example/main.cpp"]
+include-directories = [
+    "include/",
+]
