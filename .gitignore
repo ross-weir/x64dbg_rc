@@ -3,3 +3,4 @@ build*/
 .vs/
 cmake-build-*/
 /CMakeSettings.json
+.vscode
