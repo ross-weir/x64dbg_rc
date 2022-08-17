@@ -36,7 +36,7 @@ x64dbg_plugin(${CMKR_TARGET})
 
 [target.x64dbg_rc_example]
 type = "executable"
-sources = ["example/main.cpp"]
+sources = ["examples/cpp/main.cpp"]
 include-directories = [
     "include/",
 ]

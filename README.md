@@ -7,7 +7,9 @@ Currently, `attach` and `eval` commands are supported.
 `eval` allows the execution of arbitrary `x64dbg` commands, so technically all commands that can
 be triggered by `DbgCmdExecDirect` are supported. The idea behind having concrete commands like `attach` is so external tools can be debugger agnostic.
 
-See `example/main.cpp` for example usage.
+## Examples
+
+There are `C++` and `python` examples in the `examples/` directory. 
 
 ## Credits
 
